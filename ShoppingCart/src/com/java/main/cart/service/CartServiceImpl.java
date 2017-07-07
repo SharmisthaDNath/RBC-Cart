@@ -22,16 +22,15 @@ public class CartServiceImpl implements CartService {
 
 	public void addProduct(Product product) throws CartException {
 		if (null == product) {
-			throw new CartException("please select product for Cart "
+			throw new CartException(" No Product selected in cart "
 					+ cart.getCartID());
 		}
 		cart.getProducts().add(product);
 	}
 
 	public void removeProduct(Product product) throws CartException {
-		if (null == product) {
-			throw new CartException("please select the product you want to remove from Cart "
-					+ cart.getCartID());
+		if (isCartEmpty(cart)) {
+			throw new CartException(" Cart is empty ");
 		}
 		cart.getProducts().remove(product);
 	}
