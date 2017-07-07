@@ -78,11 +78,11 @@ public class CartServiceTest {
 		}
 
 	}
-	
+
 	@Test(expected = CartException.class)
 	public void testCalculateCartPriceNoQuantity() throws CartException {
-			product.setQuantity(0);
-			cartService.calculateCartPrice();
+		product.setQuantity(0);
+		cartService.calculateCartPrice();
 	}
 
 	@Test(expected = CartException.class)
@@ -110,18 +110,18 @@ public class CartServiceTest {
 	@Test
 	public void testRemoveProduct() {
 		try {
-			
+
 			product = new Product();
 			product.setQuantity(1);
 			product.setType(ProductType.LEMON);
-			
+
 			cart = new Cart();
 			cart.setCartID(1);
 			cart.getProducts().add(product);
-			
+
 			cartService = new CartServiceImpl(cart);
 			cartService.removeProduct(product);
-			assertEquals(true,cart.getProducts().isEmpty());
+			assertEquals(true, cart.getProducts().isEmpty());
 		} catch (CartException e) {
 			e.printStackTrace();
 			fail();
@@ -130,17 +130,17 @@ public class CartServiceTest {
 
 	@Test(expected = CartException.class)
 	public void testRemoveProductWithException() throws CartException {
+		cartService = new CartServiceImpl(new Cart());
 		cartService.removeProduct(null);
-		
+
 	}
 
-	
 	@Test
 	public void testRemoveProductWithNull() {
 		product = new Product();
 		product.setQuantity(1);
 		product.setType(ProductType.LEMON);
-		
+
 		cart = new Cart();
 		cart.setCartID(1);
 		cart.getProducts().add(product);
@@ -151,6 +151,7 @@ public class CartServiceTest {
 			assertTrue(null != e.getMessage());
 		}
 	}
+
 	@Test
 	public void testIsCartEmptyWithNull() {
 		cart = null;
